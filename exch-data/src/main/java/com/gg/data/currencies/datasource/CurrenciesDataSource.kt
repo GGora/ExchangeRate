@@ -21,18 +21,15 @@ class CurrenciesDataSource(
 ) {
 
     init {
-        Log.d(TAG, "Init")
-        val symbols = testSymbols.toCurrency()
+        Log.i(TAG, "Init")
         CoroutineScope(Dispatchers.IO).launch {
             try {
-//                val symbols = currenciesApi.getCodes().toCurrency()
+                val symbols = currenciesApi.getCodes().toCurrency()
                 currenciesDao.updateSymbols(symbols)
-            } catch (e: Exception){
+            } catch (e: Exception) {
                 Log.e(TAG, "Error while update symbols", e)
             }
-
         }
-
     }
 
     fun getCurrencies(): Flow<List<Currency>> {
@@ -48,45 +45,12 @@ class CurrenciesDataSource(
     }
 
     suspend fun updateCurrenciesValues(baseCode: String) = withContext(Dispatchers.IO) {
-//        val currencies = currenciesApi.getLatest(baseCode)
-        val currencies = getTestCV()
+        val currencies = currenciesApi.getLatest(baseCode)
         currenciesDao.updateValues(currencies.toCurrencyValue())
     }
 
     companion object {
-        private val TAG = "GGLOG ${CurrenciesDataSource::class.java.simpleName}"
-
-        @JvmName("getTestCV1")
-        fun getTestCV(): CurrencyValues {
-            return CurrencyValues(
-                base = "RUB",
-                date = "2022-11-14",
-                rates =
-                mapOf(
-                    "AED" to Random.nextDouble(),
-                    "AFN" to Random.nextDouble(),
-                    "ALL" to Random.nextDouble(),
-                    "AMD" to Random.nextDouble(),
-                    "ANG" to Random.nextDouble(),
-                    "AOA" to Random.nextDouble(),
-                    "ARS" to Random.nextDouble(),
-                    "AUD" to Random.nextDouble()
-                )
-            )
-        }
-
-        val testSymbols = CurrencyCodes(
-            symbols = mapOf(
-                "AED" to "United Arab Emirates Dirham",
-                "AFN" to "Afghan Afghani",
-                "ALL" to "Albanian Lek",
-                "AMD" to "Armenian Dram",
-                "ANG" to "Netherlands Antillean Guilder",
-                "AOA" to "Angolan Kwanza",
-                "ARS" to "Argentine Peso",
-                "AUD" to "Australian Dollar"
-            )
-        )
+        private val TAG = CurrenciesDataSource::class.java.simpleName
     }
 }
 

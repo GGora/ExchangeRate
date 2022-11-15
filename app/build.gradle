@@ -19,8 +19,8 @@ android {
         vectorDrawables {
             useSupportLibrary true
         }
-        buildConfigField "String", "EXCH_TOKEN", '"MmzAH1aQQpvfWZiIiC9kGMBNJFjED6V2"'
-//        buildConfigField "String", "EXCH_TOKEN", '"asd"'
+        //PUT YOUR TOKEN HERE
+        //buildConfigField "String", "EXCH_TOKEN", '"this_is_token"'
     }
 
     buildTypes {

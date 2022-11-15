@@ -4,7 +4,10 @@ import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.gg.domain.currency.model.ICurrency
-import com.gg.domain.currency.useCase.*
+import com.gg.domain.currency.useCase.GetCurrenciesUseCase
+import com.gg.domain.currency.useCase.RemoveFavouriteUseCase
+import com.gg.domain.currency.useCase.SetFavouriteUseCase
+import com.gg.domain.currency.useCase.UpdateCurrencyValuesUseCase
 import com.gg.domain.enums.SortType
 import com.gg.domain.storage.useCase.GetBaseCurrencyCodeUseCase
 import com.gg.domain.storage.useCase.GetSortTypeUseCase
@@ -72,9 +75,10 @@ class ExchangeRateViewModel : ViewModel() {
     val codes = _currencies.map { currencies -> currencies.map { it.code }.sorted() }
 
 
-    private val handler = CoroutineExceptionHandler {
-            _, exception -> Log.e(TAG, "Caught $exception", exception)
+    private val handler = CoroutineExceptionHandler { _, exception ->
+        Log.e(TAG, "Caught $exception", exception)
     }
+
     init {
         followBaseCurrency = viewModelScope.launch(handler) {
             baseCurrency
@@ -115,7 +119,7 @@ class ExchangeRateViewModel : ViewModel() {
     }
 
     companion object {
-        private val TAG = "GGLOG " + ExchangeRateViewModel::class.java.simpleName
+        private val TAG = ExchangeRateViewModel::class.java.simpleName
         private val DEFAULT_BASE_VALUE = "UNKN"
     }
 }

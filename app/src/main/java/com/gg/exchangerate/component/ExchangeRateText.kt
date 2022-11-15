@@ -46,3 +46,16 @@ fun ExcRateText2(
         fontWeight = FontWeight.Normal
     )
 }
+
+@Composable
+fun ExcRateText3(
+    modifier: Modifier = Modifier,
+    text: String = "",
+) {
+    Text(
+        modifier = modifier,
+        text = text,
+        fontSize = 18.sp,
+        fontWeight = FontWeight.Normal
+    )
+}

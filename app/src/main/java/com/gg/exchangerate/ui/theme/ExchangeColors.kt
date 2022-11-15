@@ -24,13 +24,5 @@ val ExchangeRateColorsLight = ExchangeRateColors(
     gridBackground2 = Color(0xFF200030)
 )
 
-val ExchangeRateColorsDark = ExchangeRateColors(
-    background1 = Color(0xFF252525),
-    background2 = Color(0xFF6F6F6F),
-    button = Color(0xFF3F51B5),
-    gridBackground1 = Color(0xFF301060),
-    gridBackground2 = Color(0xFF200030)
-)
-
 val ExchangeRateColorSystem: ProvidableCompositionLocal<ExchangeRateColors> =
     staticCompositionLocalOf { ExchangeRateColorsLight }

@@ -5,35 +5,26 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
-import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.KeyboardArrowDown
 import androidx.compose.material.icons.filled.KeyboardArrowUp
 import androidx.compose.material.icons.outlined.ArrowDropDown
 import androidx.compose.runtime.*
-import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Alignment.Companion.CenterVertically
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.TextStyle
-import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
-import com.gg.domain.currency.model.Currency
 import com.gg.domain.currency.model.ICurrency
 import com.gg.domain.enums.SortDirection
 import com.gg.domain.enums.SortField
 import com.gg.domain.enums.SortType
 import com.gg.exchangerate.R
-import com.gg.exchangerate.component.ExcRateButton1
-import com.gg.exchangerate.component.ExcRateText1
-import com.gg.exchangerate.component.ExcRateText2
-import com.gg.exchangerate.component.ExcRateTextHeader
+import com.gg.exchangerate.component.*
 import com.gg.exchangerate.ui.exchange.ExchangeRateViewModel
 import com.gg.exchangerate.ui.theme.ExchangeRateTheme
 import com.google.accompanist.pager.ExperimentalPagerApi
@@ -43,7 +34,8 @@ import kotlinx.coroutines.launch
 
 @Composable
 fun MainExchangeScreen(
-    navController: NavHostController, viewModel: ExchangeRateViewModel
+    navController: NavHostController,
+    viewModel: ExchangeRateViewModel
 ) {
     val currenciesPopular by viewModel.currencies.collectAsState()
     val currenciesFavourite by viewModel.currenciesFavourite.collectAsState()
@@ -212,12 +204,11 @@ fun DropdownSortContent(
                     expanded = false
                     onSortChoose(sortType)
                 }) {
-                    Text(
+                    ExcRateText3(
                         text = stringResource(
                             id = if (sortType.sortField == SortField.BY_NAME) R.string.by_name
                             else R.string.by_value
                         ),
-                        fontSize = 18.sp,
                         modifier = Modifier.padding(10.dp)
                     )
                     when (sortType.direction) {
@@ -245,24 +236,6 @@ fun DropdownCurrencyContent(
     onCurrencyChoose: (String) -> Unit
 ) {
     var expanded by remember { mutableStateOf(false) }
-    var text by rememberSaveable{ mutableStateOf("") }
-//    Box {
-////        DropdownMenu(modifier = Modifier
-////            .heightIn(max = 160.dp)
-////            .widthIn(max = 100.dp),
-////            expanded = expanded,
-////            onDismissRequest = { expanded = false }) {
-////            currencies.forEachIndexed { id, text ->
-////                DropdownMenuItem(onClick = {
-////                    expanded = false
-////                    onCurrencyChoose(currencies[id])
-////                }) {
-////                    ExcRateText1(text = text)
-////                }
-////                Divider()
-////            }
-////        }
-//    }
 
     Box {
         Button(
