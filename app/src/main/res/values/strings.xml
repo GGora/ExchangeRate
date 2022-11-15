@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">ExchangeRate</string>
+    <string name="popular">POPULAR</string>
+    <string name="favourite">FAVOURITE</string>
+    <string name="currency_rates">CURRENCY RATES</string>
+    <string name="by_name">By Name</string>
+    <string name="by_value">By Value</string>
+</resources>
