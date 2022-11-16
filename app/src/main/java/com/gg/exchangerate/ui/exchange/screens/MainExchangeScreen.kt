@@ -26,6 +26,7 @@ import com.gg.domain.enums.SortType
 import com.gg.exchangerate.R
 import com.gg.exchangerate.component.*
 import com.gg.exchangerate.ui.exchange.ExchangeRateViewModel
+import com.gg.exchangerate.ui.navigation.Screen
 import com.gg.exchangerate.ui.theme.ExchangeRateTheme
 import com.google.accompanist.pager.ExperimentalPagerApi
 import com.google.accompanist.pager.HorizontalPager
@@ -52,10 +53,18 @@ fun MainExchangeScreen(
                 .height(80.dp),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            ExcRateTextHeader(
-                modifier = Modifier.padding(top = 6.dp),
-                text = stringResource(id = R.string.currency_rates)
-            )
+            Row(verticalAlignment = CenterVertically) {
+                ExcRateTextHeader(
+                    modifier = Modifier.padding(top = 6.dp),
+                    text = stringResource(id = R.string.currency_rates)
+                )
+                IconButton(onClick = { navController.navigate(route = Screen.About.route) }) {
+                    Icon(
+                        painter = painterResource(id = R.drawable.ic_info),
+                        contentDescription = "Info screen"
+                    )
+                }
+            }
             Row(
                 modifier = Modifier.fillMaxWidth(), verticalAlignment = CenterVertically
             ) {

@@ -80,6 +80,11 @@ class DataModule {
 
     @Provides
     @Singleton
+    fun provideUpdateCurrenciesListUseCase(repository: ICurrencyRepository):
+            UpdateCurrenciesListUseCase = UpdateCurrenciesListUseCase(repository)
+
+    @Provides
+    @Singleton
     fun provideDatabase(application: Application): AppDatabase {
         return AppDatabase.getAppDatabase(application)
     }

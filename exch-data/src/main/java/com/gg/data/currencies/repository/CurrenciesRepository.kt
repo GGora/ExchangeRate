@@ -23,4 +23,8 @@ class CurrenciesRepository(private val dataSource: CurrenciesDataSource) : ICurr
     override suspend fun updateCurrenciesValues(baseCode: String) {
         dataSource.updateCurrenciesValues(baseCode)
     }
+
+    override suspend fun updateCurrenciesList(){
+        dataSource.updateCurrenciesList()
+    }
 }

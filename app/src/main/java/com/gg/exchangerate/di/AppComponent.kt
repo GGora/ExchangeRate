@@ -35,6 +35,7 @@ interface AppComponent {
     fun provideRemoveFavouriteUseCase(): RemoveFavouriteUseCase
     fun provideSetFavouriteUseCase(): SetFavouriteUseCase
     fun provideUpdateCurrencyValuesUseCase(): UpdateCurrencyValuesUseCase
+    fun provideUpdateCurrenciesListUseCase(): UpdateCurrenciesListUseCase
 
     fun injectExchangeRateViewModel(model: ExchangeRateViewModel)
 

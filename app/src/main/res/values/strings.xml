@@ -3,6 +3,7 @@
     <string name="popular">POPULAR</string>
     <string name="favourite">FAVOURITE</string>
     <string name="currency_rates">CURRENCY RATES</string>
+    <string name="about">About</string>
     <string name="by_name">By Name</string>
     <string name="by_value">By Value</string>
 </resources>

@@ -24,8 +24,7 @@ class CurrenciesDataSource(
         Log.i(TAG, "Init")
         CoroutineScope(Dispatchers.IO).launch {
             try {
-                val symbols = currenciesApi.getCodes().toCurrency()
-                currenciesDao.updateSymbols(symbols)
+                updateCurrenciesList()
             } catch (e: Exception) {
                 Log.e(TAG, "Error while update symbols", e)
             }
@@ -47,6 +46,11 @@ class CurrenciesDataSource(
     suspend fun updateCurrenciesValues(baseCode: String) = withContext(Dispatchers.IO) {
         val currencies = currenciesApi.getLatest(baseCode)
         currenciesDao.updateValues(currencies.toCurrencyValue())
+    }
+
+    suspend fun updateCurrenciesList(){
+        val symbols = currenciesApi.getCodes().toCurrency()
+        currenciesDao.updateSymbols(symbols)
     }
 
     companion object {

@@ -4,10 +4,7 @@ import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.gg.domain.currency.model.ICurrency
-import com.gg.domain.currency.useCase.GetCurrenciesUseCase
-import com.gg.domain.currency.useCase.RemoveFavouriteUseCase
-import com.gg.domain.currency.useCase.SetFavouriteUseCase
-import com.gg.domain.currency.useCase.UpdateCurrencyValuesUseCase
+import com.gg.domain.currency.useCase.*
 import com.gg.domain.enums.SortType
 import com.gg.domain.storage.useCase.GetBaseCurrencyCodeUseCase
 import com.gg.domain.storage.useCase.GetSortTypeUseCase
@@ -43,6 +40,9 @@ class ExchangeRateViewModel : ViewModel() {
 
     @Inject
     lateinit var updateCurrencyValuesUseCase: UpdateCurrencyValuesUseCase
+
+    @Inject
+    lateinit var updateCurrenciesListUseCase: UpdateCurrenciesListUseCase
 
     init {
         MainApplication.appComponent.injectExchangeRateViewModel(this)
@@ -112,6 +112,7 @@ class ExchangeRateViewModel : ViewModel() {
 
     suspend fun updateCurrencyValues() = withContext(Dispatchers.IO) {
         try {
+            if(currencies.value.isEmpty()) updateCurrenciesListUseCase.execute()
             updateCurrencyValuesUseCase.execute(baseCurrency.value)
         } catch (e: Exception) {
             Log.e(TAG, "Error while update currencies' values", e)

@@ -9,4 +9,5 @@ interface ICurrencyRepository {
     suspend fun setFavourite(currency: ICurrencyMeta)
     suspend fun removeFavourite(currency: ICurrencyMeta)
     suspend fun updateCurrenciesValues(baseCode: String)
+    suspend fun updateCurrenciesList()
 }

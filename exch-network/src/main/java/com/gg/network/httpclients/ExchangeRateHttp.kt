@@ -25,7 +25,10 @@ class ExchangeRateHttp {
                         .header(HEADER_API_KEY, token)
                         .build()
                     chain.proceed(request)
-                }).connectTimeout(5, TimeUnit.SECONDS).build()
+                })
+                .connectTimeout(10, TimeUnit.SECONDS)
+                .readTimeout(10, TimeUnit.SECONDS)
+                .build()
         }
 
         fun getRetrofit(token: String): Retrofit {
